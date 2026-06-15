@@ -1,0 +1,419 @@
+{
+  "paintings": [
+    {
+      "file": "ryu_01.png",
+      "series": "ryu",
+      "title": "數位插畫 No.01",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": true
+    },
+    {
+      "file": "ryu_02.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.02",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": true
+    },
+    {
+      "file": "ryu_03.png",
+      "series": "ryu",
+      "title": "數位插畫 No.03",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": true
+    },
+    {
+      "file": "ryu_04.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.04",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_05.png",
+      "series": "ryu",
+      "title": "數位插畫 No.05",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_06.png",
+      "series": "ryu",
+      "title": "數位插畫 No.06",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_07.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.07",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_08.png",
+      "series": "ryu",
+      "title": "數位插畫 No.08",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_09.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.09",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_10.png",
+      "series": "ryu",
+      "title": "數位插畫 No.10",
+      "medium": "數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ryu_11.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.11",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_12.png",
+      "series": "ryu",
+      "title": "數位插畫 No.12",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_13.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.13",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_14.png",
+      "series": "ryu",
+      "title": "數位插畫 No.14",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_15.png",
+      "series": "ryu",
+      "title": "數位插畫 No.15",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_16.png",
+      "series": "ryu",
+      "title": "數位插畫 No.16",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_17.png",
+      "series": "ryu",
+      "title": "數位插畫 No.17",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_18.png",
+      "series": "ryu",
+      "title": "數位插畫 No.18",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_19.jpg",
+      "series": "ryu",
+      "title": "數位插畫 No.19",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ryu_20.png",
+      "series": "ryu",
+      "title": "數位插畫 No.20",
+      "medium": "數位繪圖",
+      "year": 2023,
+      "featured": false
+    },
+    {
+      "file": "ip_01.png",
+      "series": "ip",
+      "title": "IP 角色 — 蠑螈",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": true
+    },
+    {
+      "file": "ip_02.png",
+      "series": "ip",
+      "title": "IP 角色 — 水母",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": true
+    },
+    {
+      "file": "ip_03.png",
+      "series": "ip",
+      "title": "IP 角色 — 河豚",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ip_04.png",
+      "series": "ip",
+      "title": "IP 角色 — 毛毛蟲",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ip_05.png",
+      "series": "ip",
+      "title": "IP 角色 — 蝸牛",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ip_06.png",
+      "series": "ip",
+      "title": "IP 角色 — 小魚",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "ip_07.png",
+      "series": "ip",
+      "title": "IP 角色 — 香蕉蠑螈",
+      "medium": "角色設計、數位繪圖",
+      "year": 2024,
+      "featured": false
+    },
+    {
+      "file": "exh_poster.png",
+      "series": "exhibition",
+      "title": "青蘋果作品展 主視覺海報",
+      "medium": "平面設計",
+      "year": 2022,
+      "featured": true,
+      "description": "擔任畢業展覽美編與核心幹部，主導主視覺、IP 角色與周邊開發。",
+      "level": "university"
+    },
+    {
+      "file": "exh_triptych_1.png",
+      "series": "exhibition",
+      "title": "畢業展覽 三聯畫 I",
+      "medium": "插畫、平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_triptych_2.png",
+      "series": "exhibition",
+      "title": "畢業展覽 三聯畫 II",
+      "medium": "插畫、平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_triptych_3.png",
+      "series": "exhibition",
+      "title": "畢業展覽 三聯畫 III",
+      "medium": "插畫、平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_backdrop.png",
+      "series": "exhibition",
+      "title": "展場大背板設計",
+      "medium": "主視覺、平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_sticker.png",
+      "series": "exhibition",
+      "title": "活動貼紙設計",
+      "medium": "平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_goods.jpg",
+      "series": "exhibition",
+      "title": "展覽周邊設計",
+      "medium": "周邊、平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": "",
+      "level": "university"
+    },
+    {
+      "file": "exh_posterdesign.jpg",
+      "series": "poster",
+      "title": "海報設計",
+      "medium": "平面設計",
+      "year": 2022,
+      "featured": false,
+      "description": ""
+    },
+    {
+      "file": "oil_1.jpg",
+      "series": "oil",
+      "title": "油畫 I",
+      "medium": "油畫、畫布",
+      "year": 2021
+    },
+    {
+      "file": "oil_2.jpg",
+      "series": "oil",
+      "title": "油畫 II",
+      "medium": "油畫、畫布",
+      "year": 2021
+    },
+    {
+      "file": "oil_3.jpg",
+      "series": "oil",
+      "title": "油畫 III",
+      "medium": "油畫、畫布",
+      "year": 2021
+    },
+    {
+      "file": "pastel_1.jpg",
+      "series": "pastel",
+      "title": "粉彩 I",
+      "medium": "粉彩",
+      "year": 2021
+    },
+    {
+      "file": "pastel_2.jpg",
+      "series": "pastel",
+      "title": "粉彩 II",
+      "medium": "粉彩",
+      "year": 2021
+    },
+    {
+      "file": "pastel_3.jpg",
+      "series": "pastel",
+      "title": "粉彩 III",
+      "medium": "粉彩",
+      "year": 2021
+    },
+    {
+      "file": "pastel_4.jpg",
+      "series": "pastel",
+      "title": "粉彩 IV",
+      "medium": "粉彩",
+      "year": 2021
+    },
+    {
+      "file": "pastel_5.jpg",
+      "series": "pastel",
+      "title": "粉彩 V",
+      "medium": "粉彩",
+      "year": 2021
+    },
+    {
+      "file": "pen_1.jpg",
+      "series": "pen",
+      "title": "原子筆 I",
+      "medium": "原子筆",
+      "year": 2021
+    },
+    {
+      "file": "pen_2.jpg",
+      "series": "pen",
+      "title": "原子筆 II",
+      "medium": "原子筆",
+      "year": 2021
+    },
+    {
+      "file": "exh_posterdesign.jpg",
+      "series": "exhibition",
+      "title": "記憶拼圖 · 美二2 肖像畫作品展",
+      "medium": "平面設計",
+      "year": 2021,
+      "featured": false,
+      "description": "明道中學 美工科 畢業展覽主視覺海報設計。",
+      "level": "highschool"
+    }
+  ],
+  "packaging": [
+    {
+      "file": "bento_cover.png",
+      "series": "bento",
+      "title": "沙卡里巴 便當盒包裝設計",
+      "medium": "包裝設計、印刷、IP 設計",
+      "year": 2024,
+      "featured": true,
+      "description": "以台南沙卡里巴（サカリバ）飲食文化為靈感的便當盒品牌包裝。從品牌命名、Logo、吉祥物 IP 到盒型一手包辦，融合日式元素與在地小吃精神。",
+      "details": [
+        {
+          "file": "bento_logo.png",
+          "caption": "Logo 標誌設計"
+        },
+        {
+          "file": "bento_mascot.png",
+          "caption": "吉祥物 IP 角色"
+        }
+      ]
+    },
+    {
+      "file": "egg_cover.png",
+      "series": "egg",
+      "title": "神福 GOD LUCK 雞蛋盒包裝設計",
+      "medium": "包裝設計、印刷",
+      "year": 2024,
+      "featured": true,
+      "description": "以「神福 GOD LUCK」為品牌的優質雞蛋盒包裝。結合公雞與雞蛋的吉祥意象與復古標籤排版，傳達高品質與祝福寓意，完成從 Logo、標籤到盒型結構的完整設計。",
+      "details": [
+        {
+          "file": "egg_logo.png",
+          "caption": "Logo 標誌設計"
+        },
+        {
+          "file": "egg_dieline.png",
+          "caption": "盒型結構展開圖"
+        }
+      ]
+    }
+  ]
+}
