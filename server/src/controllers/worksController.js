@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid')
 const { db } = require('../utils/db')
-const { deleteImage } = require('../utils/cloudinary')
+const { deleteImage } = require('../utils/blob')
 
 function toWork(row) {
   return {

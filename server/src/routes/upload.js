@@ -5,7 +5,18 @@ const upload = require('../middleware/upload')
 
 const router = express.Router()
 
-router.post('/image', authMiddleware, upload.single('image'), uploadImageHandler)
+// 包住 multer，把錯誤（檔案過大/格式錯誤）轉成友善訊息
+function uploadSingle(req, res, next) {
+  upload.single('image')(req, res, (err) => {
+    if (err) {
+      const msg = err.code === 'LIMIT_FILE_SIZE' ? '圖片超過 20MB 上限' : err.message
+      return res.status(400).json({ success: false, error: msg, code: 'UPLOAD_ERROR' })
+    }
+    next()
+  })
+}
+
+router.post('/image', authMiddleware, uploadSingle, uploadImageHandler)
 router.delete('/image/:pid', authMiddleware, deleteImageHandler)
 
 module.exports = router
