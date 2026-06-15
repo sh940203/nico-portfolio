@@ -4,18 +4,19 @@ const { db } = require('../utils/db')
 
 exports.login = async (req, res) => {
   try {
-    const { email, password } = req.body
-    if (!email || !password) {
-      return res.status(400).json({ success: false, error: '請填寫帳號與密碼', code: 'MISSING_FIELDS' })
+    const { password } = req.body
+    if (!password) {
+      return res.status(400).json({ success: false, error: '請輸入密碼', code: 'MISSING_FIELDS' })
     }
 
+    // 單一管理員：只需密碼（取第一筆 admin）
     const result = await db().execute({
-      sql: 'SELECT id, email, password, name FROM nico_admins WHERE email = ?',
-      args: [email.toLowerCase()],
+      sql: 'SELECT id, email, password, name FROM nico_admins ORDER BY created_at ASC LIMIT 1',
+      args: [],
     })
     const admin = result.rows[0]
     if (!admin || !(await bcrypt.compare(password, admin.password))) {
-      return res.status(401).json({ success: false, error: '帳號或密碼錯誤', code: 'INVALID_CREDENTIALS' })
+      return res.status(401).json({ success: false, error: '密碼錯誤', code: 'INVALID_CREDENTIALS' })
     }
 
     const token = jwt.sign(

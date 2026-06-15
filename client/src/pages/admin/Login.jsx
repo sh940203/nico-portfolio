@@ -4,7 +4,7 @@ import { login } from '../../api/auth'
 import useAuthStore from '../../store/authStore'
 
 export default function AdminLogin() {
-  const [form, setForm] = useState({ email: '', password: '' })
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -15,11 +15,11 @@ export default function AdminLogin() {
     setError('')
     setLoading(true)
     try {
-      const res = await login(form)
+      const res = await login({ password })
       loginStore(res.data.data.token, res.data.data.name)
       navigate('/admin')
     } catch (err) {
-      setError(err.response?.data?.error || '登入失敗，請確認帳號密碼')
+      setError(err.response?.data?.error || '登入失敗，請確認密碼')
     } finally {
       setLoading(false)
     }
@@ -35,24 +35,14 @@ export default function AdminLogin() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div>
-            <label className="text-[10px] font-sans-tc text-np-gray-400 uppercase tracking-widest">Email</label>
-            <input
-              type="email"
-              value={form.email}
-              onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-              className="w-full border-b border-np-gray-400 bg-transparent font-sans-tc text-np-black text-sm py-2 focus:outline-none focus:border-np-black transition-colors"
-              placeholder="admin@portfolio.com"
-              required
-            />
-          </div>
-          <div>
             <label className="text-[10px] font-sans-tc text-np-gray-400 uppercase tracking-widest">密碼</label>
             <input
               type="password"
-              value={form.password}
-              onChange={e => setForm(f => ({ ...f, password: e.target.value }))}
+              value={password}
+              onChange={e => setPassword(e.target.value)}
               className="w-full border-b border-np-gray-400 bg-transparent font-sans-tc text-np-black text-sm py-2 focus:outline-none focus:border-np-black transition-colors"
-              placeholder="••••••••"
+              placeholder="••••"
+              autoFocus
               required
             />
           </div>
