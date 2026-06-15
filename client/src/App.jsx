@@ -6,6 +6,7 @@ import Footer from './components/layout/Footer'
 import PrivateRoute from './components/layout/PrivateRoute'
 import PageTransition from './components/layout/PageTransition'
 import SmoothScroll from './components/layout/SmoothScroll'
+import ScrollProgress from './components/layout/ScrollProgress'
 import LoadingSpinner from './components/ui/LoadingSpinner'
 
 const Home = lazy(() => import('./pages/Home'))
@@ -41,6 +42,7 @@ function PublicLayout() {
   const location = useLocation()
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollProgress />
       <Header />
       <main className="flex-1 overflow-x-hidden">
         <Suspense fallback={<PageLoader />}>

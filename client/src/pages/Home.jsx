@@ -53,19 +53,19 @@ export default function Home() {
 
   return (
     <div className="max-w-6xl mx-auto px-4">
-      {/* 首屏：Masthead + 完整照片，100% 縮放下整張可見（扣掉 sticky header 高度） */}
-      <section className="h-[calc(100svh-3.5rem)] flex flex-col">
+      {/* 首屏：Masthead + 完整照片。手機滿版自然比例；桌機填滿視窗高度完整可見 */}
+      <section className="flex flex-col md:h-[calc(100svh-3.5rem)]">
         <Masthead />
         <motion.div
           initial={{ opacity: 0, scale: 1.02 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="flex-1 min-h-0 w-full bg-np-gray-100 overflow-hidden group flex items-center justify-center py-3"
+          className="w-full bg-np-gray-100 overflow-hidden group flex items-center justify-center md:flex-1 md:min-h-0 md:py-3"
         >
           <img
             src="/hero.jpg"
             alt="林姿余 Nico"
-            className="max-w-full max-h-full w-auto h-auto object-contain grayscale group-hover:grayscale-0 transition-all duration-1000"
+            className="w-full h-auto md:w-auto md:max-w-full md:max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-1000"
             onError={e => { e.target.style.display = 'none' }}
           />
         </motion.div>
@@ -154,7 +154,7 @@ export default function Home() {
                   <Link to={to} className="group block relative overflow-hidden border border-np-gray-100">
                     <div className="aspect-[4/5] overflow-hidden bg-np-gray-100">
                       <img src={work.coverImage.url} alt={label} loading="lazy"
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500" />
+                        className="w-full h-full object-cover transition-all duration-500 md:grayscale group-hover:grayscale-0 md:group-hover:scale-105" />
                     </div>
                     <div className="absolute inset-0 bg-np-black/30 group-hover:bg-np-black/50 transition-colors flex items-center justify-center">
                       <span className="font-display font-bold text-np-white text-lg tracking-wider text-center px-2">{label}</span>
@@ -183,7 +183,7 @@ export default function Home() {
                 onClick={() => setLightbox(pkg)}
               >
                 <img src={pkg.coverImage.url} alt={pkg.title}
-                  className="w-full h-64 object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                  className="w-full h-64 object-cover transition-all duration-500 md:grayscale group-hover:grayscale-0" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-np-black/80 to-transparent p-4 text-left">
                   <p className="font-display text-np-white font-bold text-lg">{pkg.title}</p>
                   <p className="font-sans-tc text-np-gray-100 text-xs mt-0.5">{pkg.year}</p>
