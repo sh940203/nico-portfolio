@@ -1,11 +1,10 @@
 const express = require('express')
-const { uploadImageHandler, deleteImageHandler } = require('../controllers/uploadController')
+const { uploadImageHandler, deleteImageHandler, uploadBase64Handler } = require('../controllers/uploadController')
 const authMiddleware = require('../middleware/auth')
 const upload = require('../middleware/upload')
 
 const router = express.Router()
 
-// 包住 multer，把錯誤（檔案過大/格式錯誤）轉成友善訊息
 function uploadSingle(req, res, next) {
   upload.single('image')(req, res, (err) => {
     if (err) {
@@ -16,6 +15,11 @@ function uploadSingle(req, res, next) {
   })
 }
 
+// 新格式：base64 JSON（與 Vercel serverless 相容）
+router.post('/', authMiddleware, uploadBase64Handler)
+router.delete('/', authMiddleware, deleteImageHandler)
+
+// 舊格式保留（multipart）
 router.post('/image', authMiddleware, uploadSingle, uploadImageHandler)
 router.delete('/image/:pid', authMiddleware, deleteImageHandler)
 

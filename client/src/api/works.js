@@ -7,9 +7,20 @@ export const updateWork = (id, data) => client.put(`/works/${id}`, data)
 export const deleteWork = (id) => client.delete(`/works/${id}`)
 export const reorderWorks = (orders) => client.put('/works/reorder', { orders })
 
-export const uploadImage = (file) => {
-  const form = new FormData()
-  form.append('image', file)
-  return client.post('/upload/image', form, { headers: { 'Content-Type': 'multipart/form-data' } })
+// 將 File 轉成 base64 JSON 上傳，本地 / Vercel 皆相容
+export const uploadImage = async (file) => {
+  const base64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(reader.result.split(',')[1])
+    reader.onerror = reject
+    reader.readAsDataURL(file)
+  })
+  return client.post('/upload', {
+    base64,
+    filename: file.name,
+    contentType: file.type,
+  })
 }
-export const deleteImage = (pid) => client.delete(`/upload/image/${encodeURIComponent(pid)}`)
+
+export const deleteImage = (url) =>
+  client.delete('/upload', { data: { url } })
