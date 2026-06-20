@@ -60,6 +60,39 @@ async function ensureSchema(c) {
   if (!cols.rows.some(r => r.name === 'level')) {
     await c.execute("ALTER TABLE nico_works ADD COLUMN level TEXT")
   }
+
+  // nico_profile：單列個人資訊（upsert by id='main'）
+  await c.execute(`CREATE TABLE IF NOT EXISTS nico_profile (
+    id TEXT PRIMARY KEY DEFAULT 'main',
+    name_zh TEXT NOT NULL DEFAULT '林姿余',
+    name_en TEXT NOT NULL DEFAULT 'Lin Tzu Yu',
+    nickname TEXT NOT NULL DEFAULT 'Nico',
+    birth_date TEXT,
+    phone TEXT,
+    email TEXT,
+    bio TEXT,
+    photo_url TEXT,
+    education TEXT NOT NULL DEFAULT '[]',
+    skills TEXT NOT NULL DEFAULT '[]',
+    licenses TEXT NOT NULL DEFAULT '[]',
+    links TEXT NOT NULL DEFAULT '[]',
+    updated_at INTEGER NOT NULL DEFAULT (strftime('%s','now'))
+  )`)
+
+  // 插入預設資料（若尚無記錄）
+  const prof = await c.execute("SELECT id FROM nico_profile WHERE id='main'")
+  if (!prof.rows[0]) {
+    await c.execute({
+      sql: `INSERT INTO nico_profile (id, name_zh, name_en, nickname, birth_date, phone, email, bio, education, skills, licenses, links)
+            VALUES ('main','林姿余','Lin Tzu Yu','Nico','2004-07-25','0905-616-725','noco20040725@gmail.com',
+            '嶺東科技大學時尚經營系應屆畢業生，專注於數位插畫、IP 角色設計與包裝視覺。',
+            '[{"school":"龍津國中","dept":"美術班","year":""},{"school":"明道中學","dept":"美工科","year":""},{"school":"嶺東科技大學","dept":"時尚經營系","year":"2026"}]',
+            '["Adobe Photoshop","Adobe Illustrator","Adobe InDesign","Procreate","CapCut"]',
+            '[]',
+            '[]')`,
+      args: [],
+    })
+  }
 }
 
 async function connectDB() {

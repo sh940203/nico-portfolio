@@ -6,6 +6,7 @@ import WorkCard from '../components/ui/WorkCard'
 import Lightbox from '../components/ui/Lightbox'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import { getWorks } from '../api/works'
+import { thumbUrl } from '../lib/img'
 
 // 首頁三大主圖：電繪、油畫、粉彩各一
 const HIGHLIGHTS = [
@@ -153,7 +154,7 @@ export default function Home() {
                 >
                   <Link to={to} className="group block relative overflow-hidden border border-np-gray-100">
                     <div className="aspect-[4/5] overflow-hidden bg-np-gray-100">
-                      <img src={work.coverImage.url} alt={label} loading="lazy"
+                      <img src={thumbUrl(work.coverImage.url)} alt={label} loading="lazy" decoding="async"
                         className="w-full h-full object-cover transition-all duration-500 md:grayscale group-hover:grayscale-0 md:group-hover:scale-105" />
                     </div>
                     <div className="absolute inset-0 bg-np-black/30 group-hover:bg-np-black/50 transition-colors flex items-center justify-center">
@@ -182,7 +183,7 @@ export default function Home() {
                 className="relative w-full overflow-hidden group cursor-pointer"
                 onClick={() => setLightbox(pkg)}
               >
-                <img src={pkg.coverImage.url} alt={pkg.title}
+                <img src={thumbUrl(pkg.coverImage.url)} alt={pkg.title} loading="lazy" decoding="async"
                   className="w-full h-64 object-cover transition-all duration-500 md:grayscale group-hover:grayscale-0" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-np-black/80 to-transparent p-4 text-left">
                   <p className="font-display text-np-white font-bold text-lg">{pkg.title}</p>

@@ -20,6 +20,7 @@ const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'))
 const WorksManager = lazy(() => import('./pages/admin/WorksManager'))
 const PackagingManager = lazy(() => import('./pages/admin/PackagingManager'))
 const MessagesManager = lazy(() => import('./pages/admin/MessagesManager'))
+const ProfileManager = lazy(() => import('./pages/admin/ProfileManager'))
 
 function PageLoader() {
   return (
@@ -74,6 +75,7 @@ export default function App() {
         <Route path="/admin/works" element={<PrivateRoute><Suspense fallback={<PageLoader />}><WorksManager /></Suspense></PrivateRoute>} />
         <Route path="/admin/packaging" element={<PrivateRoute><Suspense fallback={<PageLoader />}><PackagingManager /></Suspense></PrivateRoute>} />
         <Route path="/admin/messages" element={<PrivateRoute><Suspense fallback={<PageLoader />}><MessagesManager /></Suspense></PrivateRoute>} />
+        <Route path="/admin/profile" element={<PrivateRoute><Suspense fallback={<PageLoader />}><ProfileManager /></Suspense></PrivateRoute>} />
         <Route path="*" element={<PublicLayout />} />
       </Routes>
       </SmoothScroll>

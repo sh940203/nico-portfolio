@@ -29,28 +29,30 @@ function toWork(row) {
 
 exports.getWorks = async (req, res) => {
   try {
-    const { category, series, page = 1, limit = 12, featured } = req.query
+    const { category, series, featured } = req.query
+    const page  = Math.max(1, parseInt(req.query.page, 10) || 1)
+    const limit = Math.min(200, Math.max(1, parseInt(req.query.limit, 10) || 12))
     const conditions = ['is_visible = 1']
     const args = []
 
     if (category) { conditions.push('category = ?'); args.push(category) }
-    if (series) { conditions.push('series = ?'); args.push(series) }
+    if (series)   { conditions.push('series = ?');   args.push(series) }
     if (featured === 'true') { conditions.push('is_featured = 1') }
 
     const where = 'WHERE ' + conditions.join(' AND ')
     const countResult = await db().execute({ sql: `SELECT COUNT(*) AS n FROM nico_works ${where}`, args })
     const total = Number(countResult.rows[0].n)
-    const offset = (Number(page) - 1) * Number(limit)
+    const offset = (page - 1) * limit
 
     const result = await db().execute({
       sql: `SELECT * FROM nico_works ${where} ORDER BY display_order ASC, created_at DESC LIMIT ? OFFSET ?`,
-      args: [...args, Number(limit), offset],
+      args: [...args, limit, offset],
     })
 
     res.json({
       success: true,
       data: result.rows.map(toWork),
-      pagination: { total, page: Number(page), limit: Number(limit), totalPages: Math.ceil(total / Number(limit)) },
+      pagination: { total, page, limit, totalPages: Math.ceil(total / limit) },
     })
   } catch (err) {
     console.error(err)

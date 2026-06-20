@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import TiltCard from './TiltCard'
 import useHasHover from '../../hooks/useHasHover'
+import { thumbUrl } from '../../lib/img'
 
 export default function WorkCard({ work, onClick, index = 0 }) {
   const hasHover = useHasHover()
@@ -20,9 +21,10 @@ export default function WorkCard({ work, onClick, index = 0 }) {
       >
         <div className="relative overflow-hidden aspect-square bg-np-gray-100">
           <img
-            src={work.coverImage.url}
+            src={thumbUrl(work.coverImage.url)}
             alt={work.title}
             loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover"
           />
           {work.isFeatured && (
@@ -57,10 +59,11 @@ export default function WorkCard({ work, onClick, index = 0 }) {
       >
         <div className="relative overflow-hidden aspect-square bg-np-gray-100">
           <img
-            src={work.coverImage.url}
+            src={thumbUrl(work.coverImage.url)}
             alt={work.title}
             loading="lazy"
-            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
+            decoding="async"
+            className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out [will-change:filter,transform]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-np-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
             <div className="p-3 text-left translate-y-2 group-hover:translate-y-0 transition-transform duration-300">

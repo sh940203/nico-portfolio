@@ -34,6 +34,7 @@ app.use('/api/v1/auth', require('./src/routes/auth'))
 app.use('/api/v1/works', require('./src/routes/works'))
 app.use('/api/v1/upload', require('./src/routes/upload'))
 app.use('/api/v1/contact', require('./src/routes/contact'))
+app.use('/api/v1/profile', require('./src/routes/profile'))
 
 app.use((req, res) => {
   res.status(404).json({ success: false, error: '路由不存在', code: 'NOT_FOUND' })

@@ -16,6 +16,7 @@ function AdminNav() {
         <Link to="/admin/works" className="text-sm font-sans-tc text-np-gray-700 hover:text-np-red">作品管理</Link>
         <Link to="/admin/packaging" className="text-sm font-sans-tc text-np-gray-700 hover:text-np-red">包裝設計</Link>
         <Link to="/admin/messages" className="text-sm font-sans-tc text-np-gray-700 hover:text-np-red">聯絡訊息</Link>
+        <Link to="/admin/profile" className="text-sm font-sans-tc text-np-gray-700 hover:text-np-red">個人資料</Link>
         <button onClick={handleLogout} className="text-sm font-sans-tc text-np-gray-400 hover:text-np-red transition-colors">登出</button>
       </div>
     </nav>
