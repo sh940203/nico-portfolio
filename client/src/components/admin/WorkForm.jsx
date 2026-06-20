@@ -77,6 +77,7 @@ export default function WorkForm({ category, work, onSaved, onCancel }) {
 
   return (
     <div
+      data-lenis-prevent
       className="fixed inset-0 z-50 bg-np-black/60 flex items-start justify-center p-4 overflow-y-auto"
       onClick={onCancel}
     >

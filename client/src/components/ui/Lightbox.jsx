@@ -46,6 +46,7 @@ export default function Lightbox({ src, alt, onClose, title, subtitle, descripti
       )}
 
       <div
+        data-lenis-prevent
         className="flex flex-col md:flex-row gap-6 max-w-5xl w-full max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
