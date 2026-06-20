@@ -44,9 +44,9 @@ export default function Home() {
       getWorks({ category: 'painting', limit: 100 }),
       getWorks({ category: 'packaging', limit: 10 }),
     ]).then(([p, k]) => {
-      setPaintings(p.data.data)
-      setPackaging(k.data.data)
-    }).finally(() => setLoading(false))
+      setPaintings(p.data.data ?? [])
+      setPackaging(k.data.data ?? [])
+    }).catch(() => {}).finally(() => setLoading(false))
   }, [])
 
   const pick = (series) => paintings.find(w => w.series === series)
