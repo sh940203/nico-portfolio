@@ -20,8 +20,8 @@ app.use(cors({
   ].filter(Boolean),
   credentials: true,
 }))
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({ limit: '30mb' }))
+app.use(express.urlencoded({ extended: true, limit: '30mb' }))
 
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
