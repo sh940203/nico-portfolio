@@ -4,16 +4,10 @@ import WorkCard from '../components/ui/WorkCard'
 import Lightbox from '../components/ui/Lightbox'
 import LoadingSpinner from '../components/ui/LoadingSpinner'
 import { getWorks } from '../api/works'
+import { getSeries } from '../api/series'
 
-// 作品集系列（畢業展覽已獨立成 /exhibition 頁）
-const SERIES = [
-  { key: 'ryu',    label: '精選 · 電繪插畫', en: 'RYU · Digital Art', desc: '入禾 RYU 個人品牌數位插畫創作' },
-  { key: 'oil',    label: '油畫', en: 'Oil Painting', desc: '油畫、畫布' },
-  { key: 'pastel', label: '粉彩', en: 'Pastel', desc: '粉彩手繪' },
-  { key: 'pen',    label: '原子筆', en: 'Ballpoint Pen', desc: '原子筆細密畫' },
-  { key: 'ip',     label: 'IP 角色設計', en: 'IP Character Design', desc: '原創吉祥物角色設計' },
-  { key: 'poster', label: '海報設計', en: 'Poster Design', desc: '平面視覺設計' },
-]
+// 畢業展覽已獨立成 /exhibition 頁，此頁不顯示
+const EXCLUDED = ['exhibition']
 
 function SeriesHeader({ s, count }) {
   return (
@@ -31,7 +25,7 @@ function SeriesHeader({ s, count }) {
           <span className="font-serif-tc text-np-black text-lg font-bold">{s.label}</span>
           <span className="font-sans-tc text-np-gray-400 text-xs">{count} 件</span>
         </div>
-        <p className="font-sans-tc text-np-gray-400 text-xs mt-1">{s.desc}</p>
+        <p className="font-sans-tc text-np-gray-400 text-xs mt-1">{s.description}</p>
       </div>
     </motion.div>
   )
@@ -39,17 +33,27 @@ function SeriesHeader({ s, count }) {
 
 export default function Works() {
   const [works, setWorks] = useState([])
+  const [series, setSeries] = useState([])
   const [loading, setLoading] = useState(true)
   const [lightboxIndex, setLightboxIndex] = useState(null)
 
   useEffect(() => {
-    getWorks({ category: 'painting', limit: 100 })
-      .then(res => setWorks(res.data.data))
+    Promise.all([
+      getWorks({ category: 'painting', limit: 100 }),
+      getSeries('painting'),
+    ])
+      .then(([w, s]) => {
+        setWorks(w.data.data)
+        // 後台分類（依 display_order），排除已獨立的畢業展覽
+        setSeries(s.data.data
+          .filter(x => !EXCLUDED.includes(x.value))
+          .map(x => ({ key: x.value, label: x.label, en: x.en, description: x.description })))
+      })
       .finally(() => setLoading(false))
   }, [])
 
-  // 僅顯示 SERIES 定義的系列（排除 exhibition）
-  const ordered = SERIES.flatMap(s => works.filter(w => w.series === s.key))
+  // 依後台分類順序排列作品
+  const ordered = series.flatMap(s => works.filter(w => w.series === s.key))
   const currentWork = lightboxIndex !== null ? ordered[lightboxIndex] : null
 
   return (
@@ -62,7 +66,7 @@ export default function Works() {
       {loading ? (
         <div className="flex justify-center py-24"><LoadingSpinner size="lg" /></div>
       ) : (
-        SERIES.map(s => {
+        series.map(s => {
           const list = ordered.filter(w => w.series === s.key)
           if (list.length === 0) return null
           return (

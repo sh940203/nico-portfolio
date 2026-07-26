@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import ImageUploader from './ImageUploader'
 import { createWork, updateWork } from '../../api/works'
+import { getSeries } from '../../api/series'
 
 const INIT = {
   title: '',
@@ -13,24 +14,19 @@ const INIT = {
   displayOrder: 0,
 }
 
-const SERIES_OPTIONS = {
-  painting: [
-    { value: 'ryu', label: '精選系列｜入禾 RYU' },
-    { value: 'ip', label: 'IP 設計' },
-    { value: 'exhibition', label: '畢業展覽｜青蘋果作品展' },
-    { value: 'handdrawn', label: '手繪創作' },
-  ],
-  packaging: [
-    { value: 'bento', label: '沙卡里巴 便當盒' },
-    { value: 'egg', label: '神福 雞蛋盒' },
-  ],
-}
-
 export default function WorkForm({ category, work, onSaved, onCancel }) {
   const [form, setForm] = useState(INIT)
   const [coverImage, setCoverImage] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [seriesOptions, setSeriesOptions] = useState([])
+
+  // 從後台分類管理載入此類別的分類系列
+  useEffect(() => {
+    getSeries(category)
+      .then(r => setSeriesOptions(r.data.data))
+      .catch(() => setSeriesOptions([]))
+  }, [category])
 
   useEffect(() => {
     if (work) {
@@ -116,8 +112,8 @@ export default function WorkForm({ category, work, onSaved, onCancel }) {
               className={inputClass}
             >
               <option value="">— 未分類 —</option>
-              {(SERIES_OPTIONS[category] || []).map(o => (
-                <option key={o.value} value={o.value}>{o.label}</option>
+              {seriesOptions.map(o => (
+                <option key={o.id} value={o.value}>{o.label}</option>
               ))}
             </select>
           </div>
