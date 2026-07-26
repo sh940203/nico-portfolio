@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import { aboutData } from '../data/about'
+import { getProfile } from '../api/profile'
 
 function SectionLabel({ children }) {
   return (
@@ -10,8 +12,49 @@ function SectionLabel({ children }) {
   )
 }
 
+// 把後台 profile 資料合併到 About 頁面所需的結構；缺的欄位用 about.js 當預設值
+function mergeProfile(p) {
+  if (!p) return aboutData
+
+  const education = Array.isArray(p.education) && p.education.length
+    ? p.education.map(e => ({ school: e.school, department: e.dept || e.department || '', period: e.year || e.period || '' }))
+    : aboutData.education
+
+  // 由「最新」一筆學歷推導 Department（後台學歷由舊到新排列，取最後一筆）
+  const newest = education[education.length - 1]
+  const department = newest ? `${newest.school} ${newest.department}`.trim() : aboutData.department
+
+  // 後台 bio 為單一字串，依換行切成段落供「自我介紹」使用
+  const bioParas = p.bio ? p.bio.split(/\n+/).map(s => s.trim()).filter(Boolean) : aboutData.bio
+
+  return {
+    nameFull: p.nameZh || aboutData.nameFull,
+    nameEn:   p.nameEn || aboutData.nameEn,
+    birthday: p.birthDate || aboutData.birthday,
+    department,
+    intro:    aboutData.intro,          // profile schema 無此欄位，維持靜態
+    bio:      bioParas,
+    photo:    p.photoUrl || aboutData.photo,
+    contact: {
+      email: p.email || aboutData.contact.email,
+      phone: p.phone || aboutData.contact.phone,
+    },
+    education,
+    skills:    (p.skills && p.skills.length) ? p.skills : aboutData.skills,
+    licenses:  (p.licenses && p.licenses.length) ? p.licenses : aboutData.licenses,
+    languages: aboutData.languages,     // profile schema 無此欄位，維持靜態
+  }
+}
+
 export default function About() {
-  const d = aboutData
+  const [d, setD] = useState(aboutData)
+
+  useEffect(() => {
+    getProfile()
+      .then(r => setD(mergeProfile(r.data.data)))
+      .catch(() => {}) // 失敗時沿用 about.js 預設值
+  }, [])
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <div className="border-b-4 border-np-black pb-4 mb-8">
