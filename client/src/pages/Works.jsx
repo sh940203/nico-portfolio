@@ -52,8 +52,15 @@ export default function Works() {
       .finally(() => setLoading(false))
   }, [])
 
-  // 依後台分類順序排列作品
-  const ordered = series.flatMap(s => works.filter(w => w.series === s.key))
+  // 分類群組 + 「其他」catch-all：未歸類或分類對不上（且非畢業展覽）的作品也要顯示，避免被靜默隱藏
+  const knownKeys = new Set(series.map(s => s.key))
+  const leftover = works.filter(w => w.series !== 'exhibition' && !knownKeys.has(w.series))
+  const groups = leftover.length
+    ? [...series, { key: '__other__', label: '其他', en: 'Others', description: '尚未歸類的作品' }]
+    : series
+  const worksOf = (g) => g.key === '__other__' ? leftover : works.filter(w => w.series === g.key)
+
+  const ordered = groups.flatMap(worksOf)
   const currentWork = lightboxIndex !== null ? ordered[lightboxIndex] : null
 
   return (
@@ -66,8 +73,8 @@ export default function Works() {
       {loading ? (
         <div className="flex justify-center py-24"><LoadingSpinner size="lg" /></div>
       ) : (
-        series.map(s => {
-          const list = ordered.filter(w => w.series === s.key)
+        groups.map(s => {
+          const list = worksOf(s)
           if (list.length === 0) return null
           return (
             <section key={s.key}>

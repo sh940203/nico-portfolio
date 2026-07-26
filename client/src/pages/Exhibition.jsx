@@ -8,6 +8,7 @@ import { getWorks } from '../api/works'
 const GROUPS = [
   { level: 'university', label: '大學畢業展覽', en: 'University', desc: '嶺東科技大學 · 青蘋果作品展 — 主視覺・三聯畫・周邊' },
   { level: 'highschool', label: '高中畢業展覽', en: 'High School', desc: '明道中學 美工科 · 美二2 肖像畫作品展' },
+  { level: '__other__',  label: '其他', en: 'Others', desc: '尚未標註階段的展覽作品' },
 ]
 
 function GroupHeader({ g, count }) {
@@ -43,9 +44,12 @@ export default function Exhibition() {
       .finally(() => setLoading(false))
   }, [])
 
-  // 依群組順序攤平（大學 → 高中），供 lightbox 上下張使用
-  const ordered = GROUPS.flatMap(g => works.filter(w => w.level === g.level))
-    .concat(works.filter(w => !GROUPS.some(g => g.level === w.level)))
+  // 依群組順序攤平；「其他」收納未標註 level 的作品，避免被靜默隱藏
+  const knownLevels = new Set(['university', 'highschool'])
+  const worksOf = (g) => g.level === '__other__'
+    ? works.filter(w => !knownLevels.has(w.level))
+    : works.filter(w => w.level === g.level)
+  const ordered = GROUPS.flatMap(worksOf)
   const current = idx !== null ? ordered[idx] : null
 
   return (
@@ -69,7 +73,7 @@ export default function Exhibition() {
         <div className="flex justify-center py-24"><LoadingSpinner size="lg" /></div>
       ) : (
         GROUPS.map(g => {
-          const list = ordered.filter(w => w.level === g.level)
+          const list = worksOf(g)
           if (list.length === 0) return null
           return (
             <section key={g.level}>
