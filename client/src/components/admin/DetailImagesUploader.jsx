@@ -30,6 +30,13 @@ export default function DetailImagesUploader({ images = [], onChange, label = '�
 
   const removeAt = (i) => onChange(images.filter((_, idx) => idx !== i))
   const setCaption = (i, caption) => onChange(images.map((img, idx) => idx === i ? { ...img, caption } : img))
+  const move = (i, dir) => {
+    const j = i + dir
+    if (j < 0 || j >= images.length) return
+    const next = [...images]
+    ;[next[i], next[j]] = [next[j], next[i]]
+    onChange(next)
+  }
 
   return (
     <div>
@@ -40,6 +47,7 @@ export default function DetailImagesUploader({ images = [], onChange, label = '�
           {images.map((img, i) => (
             <div key={i} className="relative group border border-np-gray-100">
               <img src={img.url} alt={img.caption || `細節 ${i + 1}`} className="w-full aspect-square object-cover" />
+              <span className="absolute top-1 left-1 bg-np-black/70 text-np-white text-[10px] font-sans-tc px-1.5 py-0.5 rounded">{i + 1}</span>
               <button
                 type="button"
                 onClick={() => removeAt(i)}
@@ -48,6 +56,23 @@ export default function DetailImagesUploader({ images = [], onChange, label = '�
               >
                 ×
               </button>
+              {/* 排序調度 */}
+              <div className="absolute bottom-8 inset-x-0 flex justify-between px-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button
+                  type="button"
+                  onClick={() => move(i, -1)}
+                  disabled={i === 0}
+                  className="w-6 h-6 bg-np-black/70 text-np-white text-xs leading-none rounded-full hover:bg-np-red transition-colors disabled:opacity-20"
+                  aria-label="往前移"
+                >←</button>
+                <button
+                  type="button"
+                  onClick={() => move(i, 1)}
+                  disabled={i === images.length - 1}
+                  className="w-6 h-6 bg-np-black/70 text-np-white text-xs leading-none rounded-full hover:bg-np-red transition-colors disabled:opacity-20"
+                  aria-label="往後移"
+                >→</button>
+              </div>
               <input
                 value={img.caption || ''}
                 onChange={e => setCaption(i, e.target.value)}
