@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import ImageUploader from './ImageUploader'
+import DetailImagesUploader from './DetailImagesUploader'
 import { createWork, updateWork } from '../../api/works'
 import { getSeries } from '../../api/series'
 
@@ -17,6 +18,7 @@ const INIT = {
 export default function WorkForm({ category, work, onSaved, onCancel }) {
   const [form, setForm] = useState(INIT)
   const [coverImage, setCoverImage] = useState(null)
+  const [detailImages, setDetailImages] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [seriesOptions, setSeriesOptions] = useState([])
@@ -40,11 +42,13 @@ export default function WorkForm({ category, work, onSaved, onCancel }) {
         isFeatured: !!work.isFeatured,
         displayOrder: work.displayOrder || 0,
       })
-      // 保留現有封面圖
+      // 保留現有封面圖與細節圖
       setCoverImage(work.coverImage || null)
+      setDetailImages(Array.isArray(work.detailImages) ? work.detailImages : [])
     } else {
       setForm(INIT)
       setCoverImage(null)
+      setDetailImages([])
     }
   }, [work])
 
@@ -54,7 +58,7 @@ export default function WorkForm({ category, work, onSaved, onCancel }) {
     setLoading(true)
     setError('')
     try {
-      const payload = { ...form, category, coverImage }
+      const payload = { ...form, category, coverImage, detailImages }
       if (work) {
         await updateWork(work.id, payload)
       } else {
@@ -93,6 +97,8 @@ export default function WorkForm({ category, work, onSaved, onCancel }) {
             label="封面圖"
             initialImage={work?.coverImage || null}
           />
+
+          <DetailImagesUploader images={detailImages} onChange={setDetailImages} />
 
           <div>
             <label className={labelClass}>標題 *</label>
