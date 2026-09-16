@@ -5,9 +5,19 @@ export default function Footer() {
         <p className="font-display text-sm text-np-gray-700 tracking-widest uppercase">
           林姿余 Lin Tzu Yu · 嶺東科技大學 時尚經營系
         </p>
-        <p className="text-xs text-np-gray-400 font-sans-tc">
-          © {new Date().getFullYear()} All rights reserved.
-        </p>
+        <div className="flex items-center gap-3">
+          <p className="text-xs text-np-gray-400 font-sans-tc">
+            © {new Date().getFullYear()} All rights reserved.
+          </p>
+          <a
+            href="https://sh-studio.huhu940203.workers.dev/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-np-gray-400 font-sans-tc hover:text-np-red transition-colors"
+          >
+            Produced by @SH Studio
+          </a>
+        </div>
       </div>
     </footer>
   )
