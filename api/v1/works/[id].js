@@ -1,10 +1,9 @@
 const { db, toWork, setCors } = require('../../../lib/turso')
 const { verifyToken } = require('../../../lib/verifyToken')
-const { del } = require('@vercel/blob')
+const { deleteByUrl } = require('../../../lib/r2')
 
 async function deleteBlob(urlOrId) {
-  if (!urlOrId || !/^https?:\/\//.test(urlOrId)) return
-  try { await del(urlOrId, { token: process.env.BLOB_READ_WRITE_TOKEN }) } catch {}
+  try { await deleteByUrl(urlOrId) } catch {}
 }
 
 module.exports = async (req, res) => {

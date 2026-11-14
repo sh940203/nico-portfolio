@@ -1,8 +1,6 @@
-const { put, del } = require('@vercel/blob')
+const { putObject, deleteByUrl } = require('../../../lib/r2')
 const { setCors } = require('../../../lib/turso')
 const { verifyToken } = require('../../../lib/verifyToken')
-
-const TOKEN = process.env.BLOB_READ_WRITE_TOKEN
 
 module.exports = async (req, res) => {
   setCors(req, res)
@@ -30,9 +28,9 @@ module.exports = async (req, res) => {
 
       const safe = filename.replace(/[^\w.\-]/g, '_')
       const key = `nico/${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${safe}`
-      const blob = await put(key, buffer, { access: 'public', contentType, token: TOKEN })
+      const url = await putObject(key, buffer, contentType)
 
-      return res.status(200).json({ success: true, data: { url: blob.url, publicId: blob.url } })
+      return res.status(200).json({ success: true, data: { url, publicId: url } })
     } catch (err) {
       console.error(err)
       return res.status(500).json({ success: false, error: '圖片上傳失敗', code: 'UPLOAD_ERROR' })
@@ -43,9 +41,7 @@ module.exports = async (req, res) => {
   if (req.method === 'DELETE') {
     try {
       const { url } = req.body || {}
-      if (url && /^https?:\/\//.test(url)) {
-        await del(url, { token: TOKEN })
-      }
+      await deleteByUrl(url)
       return res.status(200).json({ success: true, message: '圖片已刪除' })
     } catch (err) {
       console.error(err)
