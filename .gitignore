@@ -25,3 +25,6 @@ npm-debug.log*
 .vscode/
 .idea/
 .vercel
+
+# migration output (contains DB URLs, not for commit)
+scripts/turso-updates.sql
