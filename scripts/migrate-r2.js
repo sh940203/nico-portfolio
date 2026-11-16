@@ -138,7 +138,7 @@ async function main() {
       console.log(`OK\n  ${oldUrl}\n  → ${newUrl}`)
 
       sqlLines.push(
-        `UPDATE nico_works SET cover_image_url='${newUrl}', cover_image_public_id='${key}', updated_at=datetime('now') WHERE id=${work.id};`
+        `UPDATE nico_works SET cover_image_url='${newUrl}', cover_image_public_id='${key}', updated_at=datetime('now') WHERE id='${work.id}';`
       )
       migrated++
     } catch (err) {
